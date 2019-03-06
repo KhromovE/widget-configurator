@@ -89,7 +89,7 @@ export class Configuration extends PureComponent {
           <Field
             value={name}
             id="name"
-            placeholder="Ввидите название"
+            placeholder="Введите название"
             label="Название виджета:"
             onChange={this.handleFieldChange}
           />
