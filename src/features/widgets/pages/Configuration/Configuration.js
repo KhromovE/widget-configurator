@@ -1,33 +1,31 @@
 import React, { PureComponent } from 'react'
 
-import { Field, Panel, PanelButton } from '../../../../ui/molecules'
-import { Tabs } from '../../../../ui/organisms'
+import { Field } from '../../../../ui/molecules'
 import { FieldWrapper } from '../../../../ui/templates'
-import { Sample, BackgroundColorPicker } from '../../organisms'
-import { TabsContainer } from '../../templates'
-import italicIcon from '../../../../assets/italic.svg'
-import boldIcon from '../../../../assets/bold.svg'
-
-const availableTabs = [
-  { key: 'title', value: 'Заголовок' },
-  { key: 'mainText', value: 'Основной текст' },
-  { key: 'button', value: 'Кнопка' },
-]
+import { Sample, BackgroundColorPicker, WidgetTags } from '../../organisms'
+import { FONT_SIZES_LIST, FONT_FAMILIES } from '../../../../constants/text'
 
 export class Configuration extends PureComponent {
   state = {
-    activeTab: availableTabs[0].key,
     config: {
       name: '',
       header: 'Стать клиентом',
+      headerSize: FONT_SIZES_LIST[8],
+      headerColor: '#6f7e8e',
       headerBold: false,
       headerItalic: false,
-      headerSize: '30',
+      headerFont: FONT_FAMILIES[0],
       backgroundColor: '#fdfdfd',
-      headerColor: '#6f7e8e',
-      mainSize: '14',
+      mainFont: FONT_FAMILIES[0],
+      mainBold: false,
+      mainItalic: false,
+      mainSize: FONT_SIZES_LIST[5],
       mainColor: '#6f7e8e',
+      buttonFont: FONT_FAMILIES[0],
+      buttonBold: false,
+      buttonItalic: false,
       buttonSize: '14',
+      buttonColor: '#fff',
     },
   }
 
@@ -53,34 +51,36 @@ export class Configuration extends PureComponent {
     }))
   }
 
-  handleTabClick = key => {
-    this.setState({
-      activeTab: key,
-    })
-  }
-
-  handleColorClick = color => {
+  handleColorClick = (property, color) => {
     this.setState(({ config }) => ({
       config: {
         ...config,
-        backgroundColor: color,
+        [property]: color,
       },
     }))
   }
 
   render() {
-    const { config, activeTab } = this.state
+    const { config } = this.state
     const {
       header,
+      headerSize,
+      headerColor,
+      headerFont,
       headerBold,
       headerItalic,
       name,
       backgroundColor,
-      headerSize,
-      headerColor,
+      mainItalic,
+      mainFont,
+      mainBold,
       mainSize,
       mainColor,
+      buttonFont,
+      buttonBold,
+      buttonItalic,
       buttonSize,
+      buttonColor,
     } = config
 
     return (
@@ -103,41 +103,49 @@ export class Configuration extends PureComponent {
             onChange={this.handleFieldChange}
           />
         </FieldWrapper>
-        <TabsContainer>
-          <Tabs tabs={availableTabs} activeTab={activeTab} onClick={this.handleTabClick}>
-            <Panel>
-              <PanelButton
-                id="headerItalic"
-                iconSrc={italicIcon}
-                checked={headerItalic}
-                onChange={this.handlePanelButtonClick}
-              />
-              <PanelButton
-                id="headerBold"
-                iconSrc={boldIcon}
-                checked={headerBold}
-                onChange={this.handlePanelButtonClick}
-              />
-            </Panel>
-            <Panel>bar</Panel>
-            <Panel>baz</Panel>
-          </Tabs>
-        </TabsContainer>
+        <WidgetTags
+          headerItalic={headerItalic}
+          handlePanelButtonClick={this.handlePanelButtonClick}
+          headerBold={headerBold}
+          handleFieldChange={this.handleFieldChange}
+          headerSize={headerSize}
+          headerFont={headerFont}
+          headerColor={headerColor}
+          mainItalic={mainItalic}
+          mainBold={mainBold}
+          mainSize={mainSize}
+          mainFont={mainFont}
+          mainColor={mainColor}
+          buttonItalic={buttonItalic}
+          buttonBold={buttonBold}
+          buttonSize={buttonSize}
+          buttonFont={buttonFont}
+          buttonColor={buttonColor}
+          handleColorClick={this.handleColorClick}
+        />
         <BackgroundColorPicker
           backgroundColor={backgroundColor}
           handleFieldChange={this.handleFieldChange}
-          onClick={this.handleColorClick}
+          onClick={color => this.handleColorClick('backgroundColor', color)}
         />
         <Sample
           header={header}
+          headerFont={headerFont}
           headerSize={headerSize}
           headerBold={headerBold}
           headerItalic={headerItalic}
           headerColor={headerColor}
           backgroundColor={backgroundColor}
+          mainFont={mainFont}
+          mainBold={mainBold}
+          mainItalic={mainItalic}
           mainSize={mainSize}
           mainColor={mainColor}
+          buttonFont={buttonFont}
+          buttonBold={buttonBold}
+          buttonItalic={buttonItalic}
           buttonSize={buttonSize}
+          buttonColor={buttonColor}
         />
       </form>
     )

@@ -69,23 +69,18 @@ export class BackgroundColorPicker extends PureComponent {
     return (
       <Wrapper>
         <FieldWrapper>
-          <div ref={this.setInputRef}>
-            <Field
-              value={backgroundColor}
-              id="backgroundColor"
-              placeholder="Цвет основного фона"
-              label="Цвет основного фона:"
-              onChange={handleFieldChange}
-              onFocus={this.handleOpenPicker}
-            />
-          </div>
+          <Field
+            ref={this.setInputRef}
+            value={backgroundColor}
+            id="backgroundColor"
+            placeholder="Цвет основного фона"
+            label="Цвет основного фона:"
+            onChange={handleFieldChange}
+            onFocus={this.handleOpenPicker}
+          />
         </FieldWrapper>
         <PickerWrapper>
-          {isOpen && (
-            <div ref={this.setPickerRef}>
-              <ColorPicker onClick={onClick} selectedColor={backgroundColor} />
-            </div>
-          )}
+          {isOpen && <ColorPicker ref={this.setPickerRef} onClick={onClick} selectedColor={backgroundColor} />}
         </PickerWrapper>
       </Wrapper>
     )

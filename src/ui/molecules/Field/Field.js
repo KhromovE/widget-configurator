@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { lighten } from 'polished'
@@ -22,12 +22,12 @@ const Input = styled.input`
   }
 `
 
-export const Field = ({ id, placeholder, value, label, onChange, onFocus, onBlur }) => (
-  <div>
+export const Field = forwardRef(({ id, placeholder, value, label, onChange, onFocus, onBlur }, ref) => (
+  <div ref={ref}>
     <Label htmlFor={id}>{label}</Label>
     <Input id={id} placeholder={placeholder} value={value} onChange={onChange} onFocus={onFocus} onBlur={onBlur} />
   </div>
-)
+))
 
 Field.propTypes = {
   id: PropTypes.string.isRequired,

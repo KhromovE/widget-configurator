@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   /* reset default styles */
-  input, button {
+  input, button, select {
     outline: none;
     border: 0;
   }

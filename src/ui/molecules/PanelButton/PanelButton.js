@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { lighten } from 'polished'
@@ -17,7 +17,6 @@ const Label = styled.label`
   user-select: none;
   border-radius: 2px;
   background-color: ${({ checked }) => checked && lighten(0.09, gray.lighter)};
-  margin-right: 10px;
 
   &:hover {
     background-color: ${({ checked }) => !checked && lighten(0.15, gray.lighter)};
@@ -37,16 +36,21 @@ const Icon = styled.img`
   width: 20px;
 `
 
-export const PanelButton = ({ id, iconSrc, checked, onChange }) => (
-  <Label htmlFor={id} checked={checked}>
+export const PanelButton = forwardRef(({ id, iconSrc, checked, onChange, className }, ref) => (
+  <Label ref={ref} htmlFor={id} checked={checked} className={className}>
     <Input type="checkbox" id={id} checked={checked} onChange={onChange} />
     <Icon src={iconSrc} />
   </Label>
-)
+))
 
 PanelButton.propTypes = {
   id: PropTypes.string.isRequired,
   iconSrc: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+  className: PropTypes.string,
+}
+
+PanelButton.defaultProps = {
+  className: null,
 }

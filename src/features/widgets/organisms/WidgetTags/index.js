@@ -1,0 +1,1 @@
+export { WidgetTags } from './WidgetTags'
