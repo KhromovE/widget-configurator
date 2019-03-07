@@ -86,9 +86,14 @@ export class WidgetTags extends PureComponent {
     const fontColorButtonExists = this.fontColorButtonRef && !this.fontColorButtonRef.contains(event.target)
     const buttonColorButtonRefExists = this.buttonColorButtonRef && !this.buttonColorButtonRef.contains(event.target)
 
-    if (pickerExists && fontColorButtonExists && buttonColorButtonRefExists) {
+    if (pickerExists && fontColorButtonExists) {
       this.setState({
         isFontPickerOpen: false,
+      })
+    }
+
+    if (pickerExists && buttonColorButtonRefExists) {
+      this.setState({
         isButtonPickerOpen: false,
       })
     }
@@ -97,16 +102,23 @@ export class WidgetTags extends PureComponent {
   handleColorChange = color => {
     const { activeTab, isFontPickerOpen } = this.state
     const { handleColorClick } = this.props
+    let buttonName
 
-    if (activeTab === availableTabs[0].key) {
-      handleColorClick('headerColor', color)
-    } else if (activeTab === availableTabs[1].key) {
-      handleColorClick('mainColor', color)
-    } else if (activeTab === availableTabs[2].key && isFontPickerOpen) {
-      handleColorClick('buttonColor', color)
-    } else {
-      handleColorClick('buttonBackgroundColor', color)
+    switch (activeTab) {
+      case availableTabs[0].key:
+        buttonName = 'headerColor'
+        break
+      case availableTabs[1].key:
+        buttonName = 'mainColor'
+        break
+      case availableTabs[2].key:
+        buttonName = isFontPickerOpen ? 'buttonColor' : 'buttonBackgroundColor'
+        break
+      default:
+        break
     }
+
+    handleColorClick(buttonName, color)
   }
 
   render() {
@@ -133,14 +145,18 @@ export class WidgetTags extends PureComponent {
     } = this.props
     let selectedColor
 
-    if (activeTab === availableTabs[0].key) {
-      selectedColor = headerColor
-    } else if (activeTab === availableTabs[1].key) {
-      selectedColor = mainColor
-    } else if (activeTab === availableTabs[2].key && isFontPickerOpen) {
-      selectedColor = buttonColor
-    } else {
-      selectedColor = buttonBackgroundColor
+    switch (activeTab) {
+      case availableTabs[0].key:
+        selectedColor = headerColor
+        break
+      case availableTabs[1].key:
+        selectedColor = mainColor
+        break
+      case availableTabs[2].key:
+        selectedColor = isFontPickerOpen ? buttonColor : buttonBackgroundColor
+        break
+      default:
+        break
     }
 
     return (
