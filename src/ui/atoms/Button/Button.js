@@ -10,7 +10,7 @@ export const Button = styled.button`
   padding: 0.9em 2.8em;
   border-radius: 5px;
   cursor: pointer;
-  color: ${({ outline, color }) => (outline ? color : white.medium)};
+  color: ${({ outline, backgroundColor }) => (outline ? backgroundColor : white.medium)};
   font-size: ${({ fontSize }) => `${fontSize}px`}
 
   &:hover {

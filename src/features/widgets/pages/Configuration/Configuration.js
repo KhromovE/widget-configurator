@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 
 import { Field } from '../../../../ui/molecules'
 import { FieldWrapper } from '../../../../ui/templates'
-import { Sample, BackgroundColorPicker, WidgetTags } from '../../organisms'
+import { Sample, BackgroundColorPicker, WidgetTags, Actions } from '../../organisms'
 import { FONT_SIZES_LIST, FONT_FAMILIES } from '../../../../constants/text'
 
 export class Configuration extends PureComponent {
@@ -151,6 +151,7 @@ export class Configuration extends PureComponent {
           buttonColor={buttonColor}
           buttonBackgroundColor={buttonBackgroundColor}
         />
+        <Actions />
       </form>
     )
   }
