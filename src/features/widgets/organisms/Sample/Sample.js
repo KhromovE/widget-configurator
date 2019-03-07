@@ -40,6 +40,7 @@ const Header = styled.h2`
 const StyledButton = styled(Button)`
   margin-top: 100px;
   ${fontStyles}
+  background-color: ${({ backgroundColor }) => backgroundColor}
 `
 
 const MainWrapper = styled.div`
@@ -68,13 +69,14 @@ const SampleView = ({
   buttonItalic,
   buttonSize,
   buttonColor,
+  buttonBackgroundColor,
 }) => (
   <Wrapper backgroundColor={backgroundColor} mainSize={mainSize} mainColor={mainColor}>
     <Header size={headerSize} bold={headerBold} italic={headerItalic} color={headerColor} fontFamily={headerFont}>
       {header}
     </Header>
     <MainWrapper bold={mainBold} italic={mainItalic} fontFamily={mainFont}>
-      <EmailField mainSize={mainSize} mainColor={mainColor} />
+      <EmailField mainSize={mainSize} mainColor={mainColor} mainBold={mainBold} mainItalic={mainItalic} />
       <Message>Процесс займет у вас не больше 10 минут</Message>
     </MainWrapper>
     <StyledButton
@@ -84,6 +86,7 @@ const SampleView = ({
       italic={buttonItalic}
       fontFamily={buttonFont}
       color={buttonColor}
+      backgroundColor={buttonBackgroundColor}
     >
       Далее
     </StyledButton>
@@ -108,6 +111,7 @@ SampleView.propTypes = {
   buttonBold: PropTypes.bool.isRequired,
   buttonItalic: PropTypes.bool.isRequired,
   buttonColor: PropTypes.string.isRequired,
+  buttonBackgroundColor: PropTypes.string.isRequired,
 }
 
 export const Sample = memo(SampleView)

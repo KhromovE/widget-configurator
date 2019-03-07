@@ -26,6 +26,7 @@ export class Configuration extends PureComponent {
       buttonItalic: false,
       buttonSize: '14',
       buttonColor: '#fff',
+      buttonBackgroundColor: '#6f7e8e',
     },
   }
 
@@ -81,6 +82,7 @@ export class Configuration extends PureComponent {
       buttonItalic,
       buttonSize,
       buttonColor,
+      buttonBackgroundColor,
     } = config
 
     return (
@@ -122,6 +124,7 @@ export class Configuration extends PureComponent {
           buttonFont={buttonFont}
           buttonColor={buttonColor}
           handleColorClick={this.handleColorClick}
+          buttonBackgroundColor={buttonBackgroundColor}
         />
         <BackgroundColorPicker
           backgroundColor={backgroundColor}
@@ -146,6 +149,7 @@ export class Configuration extends PureComponent {
           buttonItalic={buttonItalic}
           buttonSize={buttonSize}
           buttonColor={buttonColor}
+          buttonBackgroundColor={buttonBackgroundColor}
         />
       </form>
     )

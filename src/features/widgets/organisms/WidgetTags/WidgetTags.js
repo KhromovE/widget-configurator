@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { Panel, PanelButton, Select, ColorPicker, FontColorButton } from '../../../../ui/molecules'
+import { Panel, PanelButton, Select, ColorPicker, FontColorButton, PanelColorButton } from '../../../../ui/molecules'
 import { Tabs } from '../../../../ui/organisms'
 import italicIcon from '../../../../assets/italic.svg'
 import boldIcon from '../../../../assets/bold.svg'
@@ -31,7 +31,8 @@ const availableTabs = [
 export class WidgetTags extends PureComponent {
   state = {
     activeTab: availableTabs[0].key,
-    isOpen: false,
+    isFontPickerOpen: false,
+    isButtonPickerOpen: false,
   }
 
   componentDidMount() {
@@ -56,12 +57,22 @@ export class WidgetTags extends PureComponent {
     this.fontColorButtonRef = node
   }
 
-  handleOpenPicker = () => {
-    const { isOpen } = this.state
+  handleFontPickerOpen = () => {
+    const { isFontPickerOpen } = this.state
 
-    if (!isOpen) {
+    if (!isFontPickerOpen) {
       this.setState({
-        isOpen: true,
+        isFontPickerOpen: true,
+      })
+    }
+  }
+
+  handleButtonPickerOpen = () => {
+    const { isButtonPickerOpen } = this.state
+
+    if (!isButtonPickerOpen) {
+      this.setState({
+        isButtonPickerOpen: true,
       })
     }
   }
@@ -74,26 +85,29 @@ export class WidgetTags extends PureComponent {
       !this.fontColorButtonRef.contains(event.target)
     ) {
       this.setState({
-        isOpen: false,
+        isFontPickerOpen: false,
+        isButtonPickerOpen: false,
       })
     }
   }
 
   handleColorChange = color => {
-    const { activeTab } = this.state
+    const { activeTab, isFontPickerOpen } = this.state
     const { handleColorClick } = this.props
 
     if (activeTab === availableTabs[0].key) {
       handleColorClick('headerColor', color)
     } else if (activeTab === availableTabs[1].key) {
       handleColorClick('mainColor', color)
-    } else {
+    } else if (activeTab === availableTabs[2].key && isFontPickerOpen) {
       handleColorClick('buttonColor', color)
+    } else {
+      handleColorClick('buttonBackgroundColor', color)
     }
   }
 
   render() {
-    const { activeTab, isOpen } = this.state
+    const { activeTab, isFontPickerOpen, isButtonPickerOpen } = this.state
     const {
       headerColor,
       headerItalic,
@@ -112,6 +126,7 @@ export class WidgetTags extends PureComponent {
       buttonSize,
       buttonFont,
       buttonColor,
+      buttonBackgroundColor,
     } = this.props
     let selectedColor
 
@@ -119,8 +134,10 @@ export class WidgetTags extends PureComponent {
       selectedColor = headerColor
     } else if (activeTab === availableTabs[1].key) {
       selectedColor = mainColor
-    } else {
+    } else if (activeTab === availableTabs[2].key && isFontPickerOpen) {
       selectedColor = buttonColor
+    } else {
+      selectedColor = buttonBackgroundColor
     }
 
     return (
@@ -138,8 +155,8 @@ export class WidgetTags extends PureComponent {
               ref={this.setFontColorButtonRef}
               id="headerColor"
               iconSrc={textColor}
-              checked={isOpen}
-              onChange={this.handleOpenPicker}
+              checked={isFontPickerOpen}
+              onChange={this.handleFontPickerOpen}
               color={headerColor}
             />
             <Select id="headerSize" options={FONT_SIZES_LIST} onChange={handleFieldChange} value={headerSize} />
@@ -152,8 +169,8 @@ export class WidgetTags extends PureComponent {
               ref={this.setFontColorButtonRef}
               id="mainColor"
               iconSrc={textColor}
-              checked={isOpen}
-              onChange={this.handleOpenPicker}
+              checked={isFontPickerOpen}
+              onChange={this.handleFontPickerOpen}
               color={mainColor}
             />
             <Select id="mainSize" options={FONT_SIZES_LIST} onChange={handleFieldChange} value={mainSize} />
@@ -171,16 +188,17 @@ export class WidgetTags extends PureComponent {
               ref={this.setFontColorButtonRef}
               id="buttonColor"
               iconSrc={textColor}
-              checked={isOpen}
-              onChange={this.handleOpenPicker}
+              checked={isFontPickerOpen}
+              onChange={this.handleFontPickerOpen}
               color={buttonColor}
             />
             <Select id="buttonSize" options={FONT_SIZES_LIST} onChange={handleFieldChange} value={buttonSize} />
             <Select id="buttonFont" options={FONT_FAMILIES} onChange={handleFieldChange} value={buttonFont} />
+            <PanelColorButton color={buttonBackgroundColor} onClick={this.handleButtonPickerOpen} />
           </Panel>
         </Tabs>
         <PickerWrapper>
-          {isOpen && (
+          {(isFontPickerOpen || isButtonPickerOpen) && (
             <ColorPicker ref={this.setPickerRef} onClick={this.handleColorChange} selectedColor={selectedColor} />
           )}
         </PickerWrapper>
@@ -208,4 +226,5 @@ WidgetTags.propTypes = {
   buttonItalic: PropTypes.bool.isRequired,
   buttonColor: PropTypes.string.isRequired,
   handleColorClick: PropTypes.func.isRequired,
+  buttonBackgroundColor: PropTypes.string.isRequired,
 }
