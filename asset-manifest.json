@@ -1,12 +1,12 @@
 {
-  "main.js": "/widget-configurator/static/js/main.e94e6925.chunk.js",
-  "main.js.map": "/widget-configurator/static/js/main.e94e6925.chunk.js.map",
+  "main.js": "/widget-configurator/static/js/main.f4e4b41a.chunk.js",
+  "main.js.map": "/widget-configurator/static/js/main.f4e4b41a.chunk.js.map",
   "runtime~main.js": "/widget-configurator/static/js/runtime~main.f932396b.js",
   "runtime~main.js.map": "/widget-configurator/static/js/runtime~main.f932396b.js.map",
-  "static/js/2.1686b375.chunk.js": "/widget-configurator/static/js/2.1686b375.chunk.js",
-  "static/js/2.1686b375.chunk.js.map": "/widget-configurator/static/js/2.1686b375.chunk.js.map",
+  "static/js/2.f9f5ad11.chunk.js": "/widget-configurator/static/js/2.f9f5ad11.chunk.js",
+  "static/js/2.f9f5ad11.chunk.js.map": "/widget-configurator/static/js/2.f9f5ad11.chunk.js.map",
   "index.html": "/widget-configurator/index.html",
-  "precache-manifest.7597366e974a1255e0b3320036cf366e.js": "/widget-configurator/precache-manifest.7597366e974a1255e0b3320036cf366e.js",
+  "precache-manifest.a09408aca303df4b4c36d070b4e03b67.js": "/widget-configurator/precache-manifest.a09408aca303df4b4c36d070b4e03b67.js",
   "service-worker.js": "/widget-configurator/service-worker.js",
   "static/media/bold.svg": "/widget-configurator/static/media/bold.e9815020.svg",
   "static/media/italic.svg": "/widget-configurator/static/media/italic.ab0eb290.svg"
