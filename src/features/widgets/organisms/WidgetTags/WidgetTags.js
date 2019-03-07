@@ -57,6 +57,10 @@ export class WidgetTags extends PureComponent {
     this.fontColorButtonRef = node
   }
 
+  setButtonColorButtonRef = node => {
+    this.buttonColorButtonRef = node
+  }
+
   handleFontPickerOpen = () => {
     const { isFontPickerOpen } = this.state
 
@@ -78,12 +82,11 @@ export class WidgetTags extends PureComponent {
   }
 
   handleClosePicker = event => {
-    if (
-      this.pickerRef &&
-      this.fontColorButtonRef &&
-      !this.pickerRef.contains(event.target) &&
-      !this.fontColorButtonRef.contains(event.target)
-    ) {
+    const pickerExists = this.pickerRef && !this.pickerRef.contains(event.target)
+    const fontColorButtonExists = this.fontColorButtonRef && !this.fontColorButtonRef.contains(event.target)
+    const buttonColorButtonRefExists = this.buttonColorButtonRef && !this.buttonColorButtonRef.contains(event.target)
+
+    if (pickerExists && fontColorButtonExists && buttonColorButtonRefExists) {
       this.setState({
         isFontPickerOpen: false,
         isButtonPickerOpen: false,
@@ -194,7 +197,11 @@ export class WidgetTags extends PureComponent {
             />
             <Select id="buttonSize" options={FONT_SIZES_LIST} onChange={handleFieldChange} value={buttonSize} />
             <Select id="buttonFont" options={FONT_FAMILIES} onChange={handleFieldChange} value={buttonFont} />
-            <PanelColorButton color={buttonBackgroundColor} onClick={this.handleButtonPickerOpen} />
+            <PanelColorButton
+              ref={this.setButtonColorButtonRef}
+              color={buttonBackgroundColor}
+              onClick={this.handleButtonPickerOpen}
+            />
           </Panel>
         </Tabs>
         <PickerWrapper>

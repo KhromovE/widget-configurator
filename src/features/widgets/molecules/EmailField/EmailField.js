@@ -19,15 +19,23 @@ const Input = styled.input`
   color: ${({ mainColor }) => mainColor};
   font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
   font-style: ${({ italic }) => (italic ? 'italic' : 'normal')};
+  font-family: ${({ fontFamily }) => fontFamily}
 
   &::placeholder {
     color: ${({ mainColor }) => lighten(0.3, mainColor)};
   }
 `
 
-export const EmailField = ({ mainSize, mainColor, mainBold, mainItalic }) => (
+export const EmailField = ({ mainSize, mainColor, mainBold, mainItalic, mainFont }) => (
   <Wrapper>
-    <Input placeholder="Введите e-mail" mainSize={mainSize} mainColor={mainColor} bold={mainBold} italic={mainItalic} />
+    <Input
+      placeholder="Введите e-mail"
+      mainSize={mainSize}
+      mainColor={mainColor}
+      bold={mainBold}
+      italic={mainItalic}
+      fontFamily={mainFont}
+    />
   </Wrapper>
 )
 
@@ -36,4 +44,5 @@ EmailField.propTypes = {
   mainColor: PropTypes.string.isRequired,
   mainBold: PropTypes.bool.isRequired,
   mainItalic: PropTypes.bool.isRequired,
+  mainFont: PropTypes.string.isRequired,
 }

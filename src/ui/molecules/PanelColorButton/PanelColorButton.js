@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -15,11 +15,11 @@ const Button = styled.button`
   cursor: pointer;
 `
 
-export const PanelColorButton = ({ color, onClick }) => (
-  <Wrapper>
+export const PanelColorButton = forwardRef(({ color, onClick }, ref) => (
+  <Wrapper ref={ref}>
     <Button type="button" color={color} onClick={onClick} />
   </Wrapper>
-)
+))
 
 PanelColorButton.propTypes = {
   color: PropTypes.string.isRequired,

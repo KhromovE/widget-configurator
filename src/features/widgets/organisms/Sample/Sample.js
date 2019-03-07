@@ -76,7 +76,13 @@ const SampleView = ({
       {header}
     </Header>
     <MainWrapper bold={mainBold} italic={mainItalic} fontFamily={mainFont}>
-      <EmailField mainSize={mainSize} mainColor={mainColor} mainBold={mainBold} mainItalic={mainItalic} />
+      <EmailField
+        mainSize={mainSize}
+        mainColor={mainColor}
+        mainBold={mainBold}
+        mainItalic={mainItalic}
+        mainFont={mainFont}
+      />
       <Message>Процесс займет у вас не больше 10 минут</Message>
     </MainWrapper>
     <StyledButton
