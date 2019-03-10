@@ -24,6 +24,7 @@ const Wrapper = styled.div`
   color: ${({ mainColor }) => mainColor};
   background-color: ${({ backgroundColor }) => backgroundColor};
   font-size: ${({ mainSize }) => `${mainSize}px`};
+  text-align: center;
 `
 
 const Message = styled.span`

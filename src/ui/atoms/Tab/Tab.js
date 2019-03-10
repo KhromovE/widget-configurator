@@ -13,6 +13,7 @@ export const Tab = styled.button`
   padding: 10px 20px;
   color: ${({ isActive }) => (!isActive ? gray.lighter : blue.light)};
   background-color: ${({ isActive }) => (isActive ? white.medium : 'transparent')};
+  margin: 0;
 
   &:hover {
     color: ${({ isActive }) => (!isActive ? blue.lighter : null)};

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 
 import { Button } from '../../../../ui/atoms'
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   margin-top: 40px;
 `
 
-export const Actions = () => (
+const ActionsView = () => (
   <Wrapper>
     <Button outline type="button">
       Назад
@@ -17,3 +17,5 @@ export const Actions = () => (
     <Button type="submit">Вперед</Button>
   </Wrapper>
 )
+
+export const Actions = memo(ActionsView)

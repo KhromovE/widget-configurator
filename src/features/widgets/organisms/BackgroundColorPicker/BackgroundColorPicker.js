@@ -50,12 +50,10 @@ export class BackgroundColorPicker extends PureComponent {
   }
 
   handleClosePicker = event => {
-    if (
-      this.inputRef &&
-      this.pickerRef &&
-      !this.inputRef.contains(event.target) &&
-      !this.pickerRef.contains(event.target)
-    ) {
+    const inputRefExists = this.inputRef && !this.inputRef.contains(event.target)
+    const pickerRefExists = this.pickerRef && !this.pickerRef.contains(event.target)
+
+    if (inputRefExists && pickerRefExists) {
       this.setState({
         isOpen: false,
       })

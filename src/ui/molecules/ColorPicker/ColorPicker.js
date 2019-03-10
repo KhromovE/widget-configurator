@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, memo } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   border-bottom-right-radius: 12px;
 `
 
-export const ColorPicker = forwardRef(({ selectedColor, onClick }, ref) => (
+const ColorPickerView = forwardRef(({ selectedColor, onClick }, ref) => (
   <Wrapper ref={ref}>
     {COLORS.map(color => (
       <ColorCircle key={color} color={color} selectedColor={selectedColor} onClick={() => onClick(color)} />
@@ -24,7 +24,9 @@ export const ColorPicker = forwardRef(({ selectedColor, onClick }, ref) => (
   </Wrapper>
 ))
 
-ColorPicker.propTypes = {
+ColorPickerView.propTypes = {
   onClick: PropTypes.func.isRequired,
   selectedColor: PropTypes.string.isRequired,
 }
+
+export const ColorPicker = memo(ColorPickerView)
